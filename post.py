@@ -34,6 +34,26 @@ def load_next_post(path: Path) -> Post:
     raise RuntimeError("No enabled post found in posts.csv")
 
 
+def update_post_status(path: Path, post_id: str, new_status: str) -> None:
+    if not path.exists():
+        raise FileNotFoundError(f"{path} does not exist")
+
+    rows = []
+    fieldnames = []
+    with path.open(newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+        fieldnames = reader.fieldnames or []
+        for row in reader:
+            if (row.get("id") or "").strip() == post_id:
+                row["enabled"] = new_status
+            rows.append(row)
+
+    with path.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def require_env(names: Iterable[str]) -> dict[str, str]:
     values = {name: os.environ.get(name, "").strip() for name in names}
     missing = [name for name, value in values.items() if not value]
@@ -125,13 +145,21 @@ def main() -> int:
         print("No external API calls were made.")
         return 0
 
+    posted_any = False
+
     if "bluesky" in available_targets:
         post_to_bluesky(post.text)
         print("Posted to Bluesky.")
+        posted_any = True
 
     if "mastodon" in available_targets:
         post_to_mastodon(post.text)
         print("Posted to Mastodon.")
+        posted_any = True
+
+    if posted_any:
+        update_post_status(POSTS_FILE, post.post_id, "posted")
+        print("Updated posts.csv")
 
     return 0
 

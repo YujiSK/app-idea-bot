@@ -18,6 +18,8 @@ on:
 jobs:
   post:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -37,3 +39,17 @@ jobs:
           MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           MASTODON_VISIBILITY: ${{ vars.MASTODON_VISIBILITY || 'public' }}
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts.csv
+          if git diff --staged --quiet; then
+            echo "No changes in posts.csv"
+          else
+            git commit -m "Auto-update posts.csv [skip ci]"
+            echo "Committed changes"
+            git push
+            echo "Pushed changes"
+          fi

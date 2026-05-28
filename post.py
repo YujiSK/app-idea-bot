@@ -42,6 +42,10 @@ def require_env(names: Iterable[str]) -> dict[str, str]:
     return values
 
 
+def has_env(names: Iterable[str]) -> bool:
+    return all(os.environ.get(name, "").strip() for name in names)
+
+
 def post_to_bluesky(text: str) -> None:
     env = require_env(["BLUESKY_HANDLE", "BLUESKY_APP_PASSWORD"])
     session = requests.Session()
@@ -94,15 +98,38 @@ def main() -> int:
     print(f"Selected post: {post.post_id}")
     print(post.text)
 
-    if dry_run:
-        print("DRY_RUN=true; no external API calls were made.")
-        return 0
+    available_targets = []
+    skipped_targets = []
 
     if "bluesky" in targets:
+        if has_env(["BLUESKY_HANDLE", "BLUESKY_APP_PASSWORD"]):
+            available_targets.append("bluesky")
+        else:
+            skipped_targets.append("bluesky: missing BLUESKY_HANDLE or BLUESKY_APP_PASSWORD")
+
+    if "mastodon" in targets:
+        if has_env(["MASTODON_INSTANCE_URL", "MASTODON_ACCESS_TOKEN"]):
+            available_targets.append("mastodon")
+        else:
+            skipped_targets.append("mastodon: missing MASTODON_INSTANCE_URL or MASTODON_ACCESS_TOKEN")
+
+    for skipped in skipped_targets:
+        print(f"Skipping {skipped}")
+
+    if not available_targets:
+        print("No configured targets are available. Nothing to post.")
+        return 0
+
+    if dry_run:
+        print(f"DRY_RUN=true; would post to: {', '.join(available_targets)}")
+        print("No external API calls were made.")
+        return 0
+
+    if "bluesky" in available_targets:
         post_to_bluesky(post.text)
         print("Posted to Bluesky.")
 
-    if "mastodon" in targets:
+    if "mastodon" in available_targets:
         post_to_mastodon(post.text)
         print("Posted to Mastodon.")
 

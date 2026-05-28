@@ -4,3 +4,13 @@ idea-001,"Starting this account to test small app ideas in JP/EN.
 I’ll post ideas around education, student life, multilingual support, and AI tools.
 
 Ideas with strong reactions may become real MVPs.",posted
+idea-002,"【アプリ案】授業の録音やノート写真をアップロードするだけで、AIが重要ポイントを箇条書きで要約し、さらに希望の言語（英語、中国語、ベトナム語など）に翻訳してくれる留学生支援ツール。講義の理解度を格段に上げます。",true
+idea-003,"【アプリ案】学校や幼稚園から配られる大量の紙プリントをスマホで撮るだけで、AIが「提出期限」「持ち物」「返信の要不要」を自動抽出してカレンダーに登録＆通知してくれる保護者向けサポートアプリ。",true
+idea-004,"【アプリ案】海外旅行や外国人観光客向けのメニュー翻訳・確認アプリ。単なる翻訳だけでなく、「ナッツアレルギーがあるが、このメニューは大丈夫か？」などの質問をAIが現地語で店員に確認する音声カードを生成してくれる。",true
+idea-005,"【アプリ案】教科書の写真を撮るかPDFを読み込ませるだけで、AIが重要な用語や定義を自動で抽出し、デジタル単語帳（フラッシュカード）を自動作成してくれるアプリ。暗記学習の準備時間をゼロにします。",true
+idea-006,"【アプリ案】複雑な日本の行政手続き（住民票、健康保険、税金など）を、AIチャットボットが多言語でステップバイステップで案内してくれるアプリ。必要な持ち物や書類の書き方も画像付きで解説。",true
+idea-007,"[App Idea] An AI tool that summarizes recorded lectures or class notes into bullet points and translates them into your native language (Spanish, Chinese, Vietnamese, etc.). Helps study abroad students never miss a key point in class.",true
+idea-008,"[App Idea] Simply take a photo of school hand-outs, and AI will extract deadlines, required items, and event dates, then sync them to your calendar. A lifesaver for busy parents managing their kids' schedules.",true
+idea-009,"[App Idea] A travel app that helps check food ingredients. Take a photo of a menu, choose your allergies, and it generates a localized audio card/text to explain your dietary restrictions to the restaurant staff clearly.",true
+idea-010,"[App Idea] Upload a PDF or snap a photo of a textbook chapter, and AI instantly generates digital flashcards with key concepts and definitions. Zero preparation time, maximum study efficiency.",true
+idea-011,"[App Idea] A multilingual AI assistant that guides expats through local administrative procedures (visas, health insurance, taxes). Provides step-by-step checklists and explains forms in your own language.",true

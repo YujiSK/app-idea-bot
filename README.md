@@ -66,3 +66,12 @@ schedule:
 ```
 
 GitHub Actionsのスケジュールは厳密な秒単位実行ではありません。SNS投稿用途では通常問題ありません。
+
+## Operational Source of Truth
+
+AI運用・自動投稿方針・Schedule・プロンプト管理は以下のリポジトリで管理しています。
+
+https://github.com/YujiSK/idea2mvp-ai-ops
+
+このリポジトリは自動投稿Bot本体用です。
+School Letter Helper の需要検証や、X運用方針とは混ぜず、全体方針は `idea2mvp-ai-ops` 側で管理します。
